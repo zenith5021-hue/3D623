@@ -1267,7 +1267,7 @@ function loop(now) {
   const dt = Math.min(.05, (now - last) / 1000); last = now;
   for (let i = tweens.length - 1; i >= 0; i--) { const w = tweens[i]; w.t = Math.min(1, w.t + dt / w.d); w.fn(w.t); if (w.t >= 1) { tweens.splice(i, 1); w.res(); } }
   if (camTween) { const k = camTween; k.t = Math.min(1, k.t + dt / k.d); const e = ease(k.t); camera.position.lerpVectors(k.p0, k.p1, e); controls.target.lerpVectors(k.t0, k.t1, e); if (k.t >= 1) camTween = null; }
-  const nowT = performance.now(), step = tour.on && tour.i >= 0 && cur ? cur.tour[tour.i] : null;
+  const nowT = performance.now(), step = tour.i >= 0 && cur ? cur.tour[tour.i] : null;
   const want = !forceFlat && (dragging || touchHold || hoverOn || viewMode === 'exp' || nowT - lastHover < 650 || (step && step.cam !== 'read'));
   popK = reduce ? (want ? 1 : 0) : clamp(popK + (want ? dt / .8 : -dt / .55), 0, 1);
   popE = ease(popK);
